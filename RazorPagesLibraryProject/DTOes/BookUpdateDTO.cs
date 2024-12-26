@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesLibraryProject.DTOes
 {
-    public class BookCreateAndUpdateDTO
+    public class BookUpdateDTO
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
         public DateTime? CreatedAt { get; set; }
@@ -17,6 +18,5 @@ namespace RazorPagesLibraryProject.DTOes
         public GenreEntity? Genre { get; set; }
         [Required]
         public DateTime IssueDate { get; set; }
-
     }
 }
