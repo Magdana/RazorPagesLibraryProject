@@ -15,6 +15,7 @@ namespace RazorPagesLibraryProject.Entities
         public GenreEntity? Genre { get; set; }
         [Required]
         public DateTime IssueDate { get; set; }
-        
+        public string? ImagePath { get; set; }
+
     }
 }

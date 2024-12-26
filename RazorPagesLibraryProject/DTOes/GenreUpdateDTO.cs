@@ -2,7 +2,7 @@
 
 namespace RazorPagesLibraryProject.DTOes
 {
-    public class GenreCreateAndUpdateDTO
+    public class GenreUpdateDTO
     {
         public int Id { get; set; }
         [Required]

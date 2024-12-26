@@ -18,5 +18,6 @@ namespace RazorPagesLibraryProject.DTOes
         public GenreEntity? Genre { get; set; }
         [Required]
         public DateTime IssueDate { get; set; }
+        public string? ImagePath { get; set; }
     }
 }
