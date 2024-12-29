@@ -66,7 +66,7 @@ namespace RazorPagesLibraryProject.Services.Services
             }
             return "Genre was removed successfully!";
         }
-        public async Task<ResponseDTO<GenreGetDTO>> Search(string keyword)
+        public async Task<List<GenreGetDTO>> Search(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
@@ -78,16 +78,13 @@ namespace RazorPagesLibraryProject.Services.Services
             var count = genreEntities.Count();
             if (count == 0)
             {
-                return new ResponseDTO<GenreGetDTO> { Count = 0, Entities = new List<GenreGetDTO>() };
+                return new List<GenreGetDTO>();
             }
-            var genreDTOs = genreEntities.Select((e) => { return _mapper.Map<GenreGetDTO>(e); }).ToList();
-            var result = new ResponseDTO<GenreGetDTO>
-            {
-                Count = count,
-                Entities = genreDTOs
-            };
-            return result;
+
+            var genreDTOs = genreEntities.Select(e => _mapper.Map<GenreGetDTO>(e)).ToList();
+            return genreDTOs;
         }
+
 
         public async Task<List<GenreGetDTO>> GetAllAsync()
         {

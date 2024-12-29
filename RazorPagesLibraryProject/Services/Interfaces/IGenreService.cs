@@ -8,7 +8,7 @@ namespace RazorPagesLibraryProject.Services.Interfaces
         Task<GenreGetDTO> Update(GenreUpdateDTO entityDto);
         Task<GenreGetDTO> GetById(int id);
         Task<string> Delete(GenreGetDTO entityDto);
-        Task<ResponseDTO<GenreGetDTO>> Search(string keyword);
+        Task<List<GenreGetDTO>> Search(string keyword);
         Task<List<GenreGetDTO>> GetAllAsync();
     }
 }

@@ -5,7 +5,7 @@
     padding: 0;
     list-style: none;
     box-sizing: border-box;
-    border-style:none;
+    border-style: none;
 }
 
 html {
@@ -23,6 +23,10 @@ html {
     min-height: 100%;
 }
 
+header {
+    border-bottom: 2px solid grey;
+}
+
 body {
     margin-bottom: 60px;
     color: rgb(179, 97, 16);
@@ -38,6 +42,7 @@ body {
     justify-content: space-between;
     max-width: 1440px;
     margin: 0 auto;
+    padding: 8px 0px;
 }
 
 .navigation-bar {
@@ -110,7 +115,7 @@ h5, h2 {
 }
 
 h2 {
-    margin-top:30px;
+    font-size: 45px
 }
 
 .btn-success {
@@ -141,7 +146,7 @@ h2 {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding-bottom:50px;
+    padding-bottom: 50px;
 }
 
 .card-header {
@@ -178,6 +183,7 @@ h5 {
     cursor: pointer;
     background-color: cornsilk;
 }
+
 .add-card {
     margin: 30px 0px;
     display: flex;
@@ -192,7 +198,7 @@ h5 {
     }
 
 .form-control {
-    width: 350px;
+    width: 300px;
     height: 50px;
     border-radius: 10px;
     padding: 8px;
@@ -213,3 +219,52 @@ h5 {
     align-items: center;
     gap: 5px;
 }
+
+.cancel-btn {
+    background-color: chocolate;
+    color: white;
+}
+
+.save-mode {
+    background-color: darkolivegreen;
+    color: white;
+}
+
+.editable {
+    border: 2px solid #f0ad4e;
+    background-color: #fff;
+}
+
+.edit-input {
+    height: 30px;
+    width: 245px;
+    border-radius: 30px;
+    padding: 8px;
+    background-color: antiquewhite
+}
+
+.edit-buttons-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-title-cont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 90%
+}
+
+    .search-title-cont form {
+        display: flex;
+        gap: 5px;
+    }

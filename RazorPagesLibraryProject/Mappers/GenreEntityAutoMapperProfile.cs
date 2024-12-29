@@ -11,6 +11,8 @@ namespace RazorPagesLibraryProject.Mappers
             CreateMap<GenreEntity, GenreGetDTO>();
             CreateMap<GenreCreateDTO, GenreEntity>();
             CreateMap<GenreUpdateDTO, GenreEntity>();
+            CreateMap<GenreGetDTO, GenreEntity>();
+            CreateMap<GenreEntity, GenreUpdateDTO>();
         }
     }
 }

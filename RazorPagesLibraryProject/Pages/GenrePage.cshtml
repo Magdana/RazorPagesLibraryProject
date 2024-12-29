@@ -3,9 +3,17 @@
 @{
 }
 <div class="genres-ctn">
-    <div class="text-center">
-        <h2>All Genres</h2>
+    <div class="search-title-cont">
+        <div class="text-center">
+            <h2>All Genres</h2>
+        </div>
+        <form id="search-form" method="get">
+            <input type="text" asp-for="SearchWord" class="form-control" placeholder="Enter the search word..." required />
+            <button type="submit" value="Filter" class="add-btn">Search</button>
+            <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
+        </form>
     </div>
+   
     <div class="add-card">
         <h5>Add New Genre</h5>
         <form method="post" asp-page-handler="AddGenre">
@@ -23,17 +31,31 @@
                             <h5>@genre.Name</h5>
                         </div>
                         <div class="ctrl-btns-cont">
-                            <form method="post" asp-page-handler="DeleteGenre" >
+                            <form method="post" asp-page-handler="DeleteGenre" id="delete-form-@genre.Id">
                                 <input type="hidden" name="GenreId" value="@genre.Id" />
-                                <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();">Delete</button>
+                                <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();"> <i class="fas fa-trash-alt"></i> Delete</button>
                             </form>
-                            <form method="post" asp-page-handler="DeleteGenre">
-                                <input type="hidden" name="GenreId" value="@genre" />
-                                <button type="submit" class="ctrl-btn ed-orange">Edit</button>
-                            </form>
-                            <form method="post" asp-page-handler="DeleteGenre">
-                                <input type="hidden" name="GenreId" value="@genre" />
-                                <button type="submit" class="ctrl-btn ed-green">Save</button>
+                            <form method="post" asp-page-handler="EditGenre" id="edit-form-@genre.Id">
+                                <input type="hidden" name="GenreId" value="@genre.Id" required/>
+                                <div class="edit-buttons-input">
+                                    <input type="text"
+                                           name="UpdatedGenreName"
+                                           value="@genre.Name"
+                                           class="edit-input"
+                                           id="input-@genre.Id"
+                                           style="display: none;"/>
+                                    <div class="edit-buttons">
+                                        <button type="button" class="ctrl-btn ed-orange edit-btn" id="edit-btn-@genre.Id">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+
+                                        <button type="button" class="ctrl-btn ed-gray cancel-btn" id="cancel-btn-@genre.Id" style="display: none;">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
+                                    </div>
+                                   
+                                </div>
+
                             </form>
                         </div>
 
@@ -45,4 +67,6 @@
 
 </div>
 
- <script src="./js/site.js" asp-append-version="true"></script>
+<script src="./js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
