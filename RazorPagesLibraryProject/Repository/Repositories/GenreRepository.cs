@@ -48,7 +48,7 @@ namespace RazorPagesLibraryProject.Repository.Repositories
         {
             if (_context == null) return null;
             var entity = await _context.Set<GenreEntity>()
-                              .SingleOrDefaultAsync();
+                              .FirstOrDefaultAsync(g => g.Id == id);
             return entity;
         }
 
@@ -62,11 +62,6 @@ namespace RazorPagesLibraryProject.Repository.Repositories
 
             await base.Delete(entity);
 
-        }
-        public override async Task DeleteRange(IEnumerable<GenreEntity> entities)
-        {
-
-            await base.DeleteRange(entities);
         }
         public override async Task<IEnumerable<GenreEntity>> GetAllWhereAsync(Expression<Func<GenreEntity, bool>> predicate)
         {

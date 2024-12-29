@@ -48,7 +48,7 @@ namespace RazorPagesLibraryProject.Services.Services
             return genreDto;
         }
 
-        public async Task<string> Delete(GenreDeleteDTO entityDto)
+        public async Task<string> Delete(GenreGetDTO entityDto)
         {
             if (entityDto != null)
             {
@@ -57,6 +57,10 @@ namespace RazorPagesLibraryProject.Services.Services
                 if (entity == null)
                 {
                     throw new ArgumentNullException("entity was not found!");
+                }
+                if (entity.Id != entityDto.Id)
+                {
+                    throw new InvalidOperationException($"Entity mismatch: expected ID {entityDto.Id}, but found {entity.Id}");
                 }
                 await _unitOfWork.genreRepository.Delete(entity);
             }
@@ -93,4 +97,4 @@ namespace RazorPagesLibraryProject.Services.Services
         }
     }
 }
-}
+

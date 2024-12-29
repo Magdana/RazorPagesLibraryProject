@@ -1,18 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&family=Outfit&family=Playwrite+CO+Guides&family=Playwrite+HR+Lijeva+Guides&family=Rubik+Vinyl&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    border-style:none;
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: rgb(179, 97, 16);
+    background-image: url(../cover.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar-div {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.navigation-bar {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.welcome-text {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    color: rgb(179, 97, 16);
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    font-style: italic;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: darkred;
+    }
+
+.navigation-bar {
+    list-style: none;
+    margin: 0 auto;
+}
+
+.navigation-link {
+    color: rgb(179, 97, 16);
+}
+
+.main-logo {
+    color: rgb(179, 97, 16);
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: "Epilogue", serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.text-center p {
+    font-size: 30px;
+}
+
+.card-rounded {
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+    .card-rounded:hover {
+        color: darkred;
+    }
+
+h5, h2 {
+    color: rgb(179, 97, 16);
+    font-style: italic;
+}
+
+h2 {
+    margin-top:30px;
+}
+
+.btn-success {
+    background-color: rgb(179, 97, 16);
+}
+
+.history-cont p {
+    font-size: 18px;
+}
+
+.history-cont {
+    max-width: 45%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.genres-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom:50px;
+}
+
+.card-header {
+    width: 250px;
+    height: 100px;
+    background-color: navajowhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+    .card-header:hover {
+        transform: scale(1.1);
+    }
+
+h5 {
+    font-size: 20px;
+}
+
+.ctrl-btns-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.ctrl-btn {
+    width: 70px;
+    height: 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: cornsilk;
+}
+.add-card {
+    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+    .add-card h5 {
+        margin-bottom: 10px;
+        color: cornsilk;
+    }
+
+.form-control {
+    width: 350px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: cornsilk;
+}
+
+.add-btn {
+    background-color: cornsilk;
+    border-radius: 10px;
+    padding: 5px;
+    width: 70px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.add-card form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

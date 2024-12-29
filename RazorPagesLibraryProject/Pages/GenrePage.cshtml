@@ -1,0 +1,48 @@
+﻿@page
+@model RazorPagesLibraryProject.Pages.GenrePageModel
+@{
+}
+<div class="genres-ctn">
+    <div class="text-center">
+        <h2>All Genres</h2>
+    </div>
+    <div class="add-card">
+        <h5>Add New Genre</h5>
+        <form method="post" asp-page-handler="AddGenre">
+            <input type="text" asp-for="NewGenreName" class="form-control" placeholder="Enter new genre name..." required />
+            <button type="submit" class="add-btn">Add Genre</button>
+        </form>
+    </div>
+    <div class="genres-list">
+        <div class="row">
+            @foreach (var genre in Model.Genres)
+            {
+                <div class="card-ctn">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>@genre.Name</h5>
+                        </div>
+                        <div class="ctrl-btns-cont">
+                            <form method="post" asp-page-handler="DeleteGenre" >
+                                <input type="hidden" name="GenreId" value="@genre.Id" />
+                                <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();">Delete</button>
+                            </form>
+                            <form method="post" asp-page-handler="DeleteGenre">
+                                <input type="hidden" name="GenreId" value="@genre" />
+                                <button type="submit" class="ctrl-btn ed-orange">Edit</button>
+                            </form>
+                            <form method="post" asp-page-handler="DeleteGenre">
+                                <input type="hidden" name="GenreId" value="@genre" />
+                                <button type="submit" class="ctrl-btn ed-green">Save</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+ <script src="./js/site.js" asp-append-version="true"></script>
