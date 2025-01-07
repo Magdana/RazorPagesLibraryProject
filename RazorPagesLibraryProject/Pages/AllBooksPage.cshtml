@@ -2,3 +2,61 @@
 @model RazorPagesLibraryProject.Pages.AllBooksPageModel
 @{
 }
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+<div class="books-ctn">
+    <div class="search-title-cont-books">
+        <div class="text-center">
+            <h2>All Books</h2>
+        </div>
+        @*  <form id="search-form" method="get">
+        <input type="text" asp-for="SearchWord" class="form-control" placeholder="Enter the search word..." required />
+        <button type="submit" value="Filter" class="add-btn">Search</button>
+        <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
+        </form> *@
+    </div>
+
+    <div class="add-book">
+        <h5>Add New Book</h5>
+        <form method="post" asp-page-handler="AddBook" id="add-book-form" enctype="multipart/form-data">
+            <input type="text" asp-for="NewBookName" class="form-control" placeholder="Book Name..." required />
+            <input type="text" asp-for="NewBookAuthor" class="form-control" placeholder="Author..." required />
+            <textarea asp-for="NewBookDescription" class="form-control" placeholder="Description..."></textarea>
+            <input type="number" asp-for="NewBookInitialCount" class="form-control" placeholder="Number Of Books..." required min="1" />
+            <select asp-for="NewBookGenreId" asp-items="Model.Genres" class="form-control" required>
+                <option value="">-- Select Genre --</option>
+            </select>
+            <input type="date" asp-for="NewBookIssueDate" class="form-control" required />
+            <input type="file" name="NewBookImagePath" class="form-control" accept="image/*" required />
+            <div class="add-clear-btns">
+                <button type="submit" class="add-btn">Add Book</button>
+                <button type="button" class="add-btn" onclick="clearForm()">Clear</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="books-list">
+        <div class="listed-books">
+            @foreach (var book in Model.Books)
+            {
+                <div class="book-ctn">
+                    <a asp-page="/BookPage" asp-route-id="@book.Id">
+
+                        <div class="book">
+                            <div class="book-header">
+                                <div class="book-image">
+                                    <img src="@book.ImagePath" alt="@book.Name" />
+                                </div>
+                                <p class="book-nm">@book.Name</p>
+                                <p class="book-at">@book.Author</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                </div>
+            }
+        </div>
+    </div>
+</div>
