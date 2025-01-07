@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using RazorPagesLibraryProject.DataAccess;
 using RazorPagesLibraryProject.Mappers;
 using RazorPagesLibraryProject.Repository.Interfaces;
@@ -36,6 +37,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "UploadedFiles", "images")),
+    RequestPath = "/UploadedFiles/images"
+});
 
 app.UseRouting();
 

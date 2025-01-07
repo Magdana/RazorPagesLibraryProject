@@ -46,7 +46,7 @@ namespace RazorPagesLibraryProject.Repository.Repositories
             public virtual async Task Delete(T entity)
             {
                 if (entity == null) return;
-                _context.Entry(entity).State = EntityState.Deleted;
+                _context.Set<T>().Remove(entity);
                 await this.SaveChangesAsync();
             }
             public virtual async Task DeleteRange(IEnumerable<T> entities)

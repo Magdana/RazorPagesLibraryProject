@@ -42,7 +42,6 @@ namespace RazorPagesLibraryProject.Pages
             catch (Exception ex)
             {
                 Genres = new List<GenreGetDTO>();
-                ModelState.AddModelError(string.Empty, $"Error loading genres: {ex.Message}");
             }
         }
 
@@ -109,7 +108,6 @@ namespace RazorPagesLibraryProject.Pages
                 return Page();
             }
         }
-
 
     }
 

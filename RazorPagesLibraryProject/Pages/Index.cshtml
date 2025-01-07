@@ -6,10 +6,31 @@
 
 <div class="text-center">
     <h1 class="welcome-text">Welcome To Library</h1>
-    <p>Our History</p>
-    <div class="history-cont">
-        <p>Founded with a passion for literature and a vision to connect communities through the power of books, our library has been a cornerstone of knowledge and inspiration since its inception in 2005. From humble beginnings with a modest collection of 500 books, we have grown into a vibrant hub with over 50,000 titles, catering to readers of all ages and interests.</p>
-        <p>Over the years, we have expanded our offerings to include not only a wide range of books but also engaging events such as book clubs, literacy workshops, and author meet-and-greets. Our library is more than just a place to borrow books—it's a welcoming space where creativity flourishes, ideas are shared, and connections are made.</p>
-        <p>Each chapter of our story reflects our unwavering commitment to fostering a love for reading and lifelong learning, ensuring that our library remains a timeless treasure for generations to come.</p>
+
+    <div class="main-cont-div">
+        <div class="slider">
+            <div class="slides">
+
+                @if (Model.Urls != null)
+                {
+                    @foreach (string s in Model.Urls)
+                    {
+                        <div class="slide">
+                            <img src="@s" alt="Image" />
+                        </div>
+                    }
+                }
+
+            </div>
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+        <div class="history-cont">
+            <p class="history-title">Our History</p>
+            <p>Founded with a passion for literature and a vision to connect communities through the power of books, our library has been a cornerstone of knowledge and inspiration since its inception in 2005. From humble beginnings with a modest collection of 500 books, we have grown into a vibrant hub with over 50,000 titles, catering to readers of all ages and interests.</p>
+            <p>Over the years, we have expanded our offerings to include not only a wide range of books but also engaging events such as book clubs, literacy workshops, and author meet-and-greets. Our library is more than just a place to borrow books—it's a welcoming space where creativity flourishes, ideas are shared, and connections are made.</p>
+            <p>Each chapter of our story reflects our unwavering commitment to fostering a love for reading and lifelong learning, ensuring that our library remains a timeless treasure for generations to come.</p>
+        </div>
     </div>
+
 </div>
