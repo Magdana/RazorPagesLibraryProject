@@ -170,16 +170,20 @@ h2 {
     height: 100px;
     background-color: navajowhite;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
     justify-content: center;
     border-radius: 30px;
     cursor: pointer;
     transition: 0.3s ease;
 }
-
-    .card-header:hover {
-        transform: scale(1.1);
-    }
+.card-header p{
+    font-size: 13px;
+}
+.card-header:hover {
+    transform: scale(1.1);
+}
 
 h5 {
     font-size: 20px;
@@ -309,16 +313,17 @@ h5 {
     border-radius: 10px;
     transition: 0.3s ease;
 }
+
     .book-ctn:hover {
         transform: scale(1.1);
     }
 
-    .books-list {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 30px 0px;
-    }
+.books-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px;
+}
 
 .book-image {
     display: flex;
@@ -428,6 +433,6 @@ h5 {
         color: cornsilk;
     }
 
-    footer{
-        margin-top: 40px;
-    }
+footer {
+    margin-top: 40px;
+}

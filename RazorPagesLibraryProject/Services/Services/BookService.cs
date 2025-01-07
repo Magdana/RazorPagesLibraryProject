@@ -163,6 +163,22 @@ namespace RazorPagesLibraryProject.Services.Services
 
             return Task.FromResult(links);
         }
+        public async Task<IEnumerable<BookGetDTO>> GetBooksByGenresAsync(int genreId)
+        {
+            try
+            {
+                var bookEntities = await _unitOfWork.bookRepository.GetAllWhereAsync(x => x.GenreId == genreId);
+                var mapped = _mapper.Map<IEnumerable<BookGetDTO>>(bookEntities);
+
+                return mapped ?? Enumerable.Empty<BookGetDTO>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching books for GenreId {genreId}: {ex.Message}");
+                return Enumerable.Empty<BookGetDTO>();
+            }
+        }
+
 
 
     }

@@ -29,6 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>@genre.Name</h5>
+                            <p class="book-count">@(genre.Count > 0 ? $"{genre.Count} book(s)" : "No books")</p>
                         </div>
                         <div class="ctrl-btns-cont">
                             <form method="post" asp-page-handler="DeleteGenre" id="delete-form-@genre.Id">

@@ -5,18 +5,21 @@ using RazorPagesLibraryProject.DTOes;
 using RazorPagesLibraryProject.Entities;
 using RazorPagesLibraryProject.Services.Interfaces;
 using RazorPagesLibraryProject.Services.Services;
+using System.Linq;
 
 namespace RazorPagesLibraryProject.Pages
 {
     public class GenrePageModel : PageModel
     {
         private readonly IGenreService _genreService;
+        private readonly IBookService _bookService;
         private readonly IMapper _mapper;
 
-        public GenrePageModel(IGenreService genreService, IMapper mapper)
+        public GenrePageModel(IGenreService genreService, IMapper mapper, IBookService bookService)
         {
             _genreService = genreService;
             _mapper = mapper;
+            _bookService= bookService;
         }
         public List<GenreGetDTO> Genres { get; set; }
         [BindProperty]
@@ -27,12 +30,22 @@ namespace RazorPagesLibraryProject.Pages
         public string UpdatedGenreName { get; set; }
         [BindProperty(SupportsGet = true)]
         public string? SearchWord { get; set; }
+        [BindProperty]
+        public int Count { get; set; }
 
         public async Task OnGet()
         {
             try
             {
-                Genres = await _genreService.GetAllAsync();
+                var genres = await _genreService.GetAllAsync();
+
+                foreach (var genre in genres)
+                {
+                    var books = await _bookService.GetBooksByGenresAsync(genre.Id);
+                    genre.Count = books.Count();
+                }
+
+                Genres = genres;
 
                 if (!string.IsNullOrEmpty(SearchWord))
                 {

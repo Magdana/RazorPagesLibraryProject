@@ -13,5 +13,6 @@ namespace RazorPagesLibraryProject.Services.Interfaces
         Task<ResponseDTO<BookGetDTO>> Search(string keyword);
         Task<List<BookGetDTO>> GetAllAsync();
         Task<List<string>> GetLastAdded();
+        Task<IEnumerable<BookGetDTO>> GetBooksByGenresAsync(int genreId);
     }
 }
