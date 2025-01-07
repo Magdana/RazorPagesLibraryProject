@@ -49,7 +49,8 @@ namespace RazorPagesLibraryProject.Repository.Repositories
         {
             if (_context == null) return null;
             var entity = await _context.Set<BookEntity>()
-                              .SingleOrDefaultAsync();
+                .Include(b => b.Genre)
+                              .FirstOrDefaultAsync(book => book.Id == id);
             return entity;
         }
 
@@ -82,7 +83,7 @@ namespace RazorPagesLibraryProject.Repository.Repositories
         {
             return base.GetPagedResult(entity, page, count);
         }
-       
+
         public override IQueryable<BookEntity> GetAllWhere(Expression<Func<BookEntity, bool>> predicate)
         {
             var entities = _context.Set<BookEntity>().Where(predicate);

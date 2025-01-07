@@ -62,6 +62,12 @@ namespace RazorPagesLibraryProject.Services.Services
                 {
                     throw new InvalidOperationException($"Entity mismatch: expected ID {entityDto.Id}, but found {entity.Id}");
                 }
+                var relatedBooks = await _unitOfWork.bookRepository.GetAllWhereAsync(b => b.GenreId == entityDto.Id);
+                foreach (var book in relatedBooks)
+                {
+                    book.GenreId = null; 
+                    await _unitOfWork.bookRepository.Update(book);
+                }
                 await _unitOfWork.genreRepository.Delete(entity);
             }
             return "Genre was removed successfully!";

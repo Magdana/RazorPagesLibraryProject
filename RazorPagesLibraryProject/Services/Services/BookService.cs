@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesLibraryProject.DTOes;
 using RazorPagesLibraryProject.Entities;
@@ -12,10 +13,12 @@ namespace RazorPagesLibraryProject.Services.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public BookService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BookService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<BookGetDTO> Add(BookCreateDTO entitydto)
         {
@@ -31,6 +34,16 @@ namespace RazorPagesLibraryProject.Services.Services
             if (entity == null)
             {
                 throw new KeyNotFoundException("No book was found to update!");
+            }
+            if (!string.IsNullOrWhiteSpace(entity.ImagePath))
+            {
+                var cleanImagePath = entity.ImagePath.TrimStart('\\', '/');
+                var fileUploadPath = Path.Combine(_webHostEnvironment.WebRootPath, cleanImagePath);
+
+                if (System.IO.File.Exists(fileUploadPath))
+                {
+                    System.IO.File.Delete(fileUploadPath);
+                }
             }
             var entityToUpdate = _mapper.Map(entityDto, entity);
             await _unitOfWork.bookRepository.Update(entityToUpdate);
@@ -65,7 +78,7 @@ namespace RazorPagesLibraryProject.Services.Services
             return result;
         }
 
-        public async Task<string> Delete(BookDeleteDTO entityDto)
+        public async Task Delete(BookGetDTO entityDto)
         {
             if (entityDto != null)
             {
@@ -78,24 +91,16 @@ namespace RazorPagesLibraryProject.Services.Services
 
                 if (!string.IsNullOrWhiteSpace(entity.ImagePath))
                 {
-                    Uri imageUrl = new Uri(entity.ImagePath);
-                    string relativePath = imageUrl.AbsolutePath;
-                    string imagePath = Path.Combine(Directory.GetCurrentDirectory(), relativePath.TrimStart('/'));
-                    if (File.Exists(imagePath))
+                    var cleanImagePath = entity.ImagePath.TrimStart('\\', '/');
+                    var fileUploadPath = Path.Combine(_webHostEnvironment.WebRootPath, cleanImagePath);
+
+                    if (System.IO.File.Exists(fileUploadPath))
                     {
-                        try
-                        {
-                            File.Delete(imagePath);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new IOException($"Failed to delete the image file: {imagePath}", ex);
-                        }
+                        System.IO.File.Delete(fileUploadPath);
                     }
                 }
                 await _unitOfWork.bookRepository.Delete(entity);
             }
-            return "Book was removed successfully!";
 
         }
 
@@ -146,6 +151,20 @@ namespace RazorPagesLibraryProject.Services.Services
                             .OrderByDescending(d => d.CreatedAt).ToList();
             return dtoes;
         }
+        public Task<List<string>> GetLastAdded()
+        {
+            var bookEntities = _unitOfWork.bookRepository.GetAllWhere(x => x.ImagePath != null);
+
+            var links = bookEntities
+                .OrderByDescending(d => d.CreatedAt)
+                .Take(10)
+                .Select(x => x.ImagePath)
+                .ToList();
+
+            return Task.FromResult(links);
+        }
+
+
     }
 }
 

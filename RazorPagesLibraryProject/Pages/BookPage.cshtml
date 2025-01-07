@@ -2,3 +2,67 @@
 @model RazorPagesLibraryProject.Pages.BookPageModel
 @{
 }
+
+<div class="single-book-ctn">
+    <div class="book-container-div">
+        <div class="book-img-ctn">
+            @if (!string.IsNullOrEmpty(Model.CurrentImagePath))
+            {
+                <img src="@Model.CurrentImagePath" alt="Current Book Image" />
+            }
+            else
+            {
+                <p>No image available.</p>
+            }
+        </div>
+        <div class="book-info-ctn">
+            <p><span>Book Name:</span> @Model.Name</p>
+            <p><span>Book Author:</span> @Model.Author</p>
+            <p><span>Added On:</span> @(Model.CreatedAt?.ToString("yyyy-MM-dd") ?? "Unknown")</p>
+            <p><span>Description:</span> @Model.Description</p>
+            <p><span>Genre:</span> @(Model.Genre?.Name ?? "Unknown")</p>
+            <p><span>Issue Date:</span> @Model.IssueDate.ToString("yyyy-MM-dd")</p>
+            <p>
+                <span>Availability:</span>
+                @(Model.InitialCount > 0 ? "Available" : "Unavailable")
+            </p>
+            <div class="ctrl-btns-cont">
+                <form method="post" asp-page-handler="DeleteBook" id="delete-form-@Model.Id">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();">
+                        <i class="fas fa-trash-alt"></i>  Delete
+                    </button>
+                </form>
+                <form method="post" asp-page-handler="EditBook" id="edit-form-@Model.Id" enctype="multipart/form-data">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="edit-buttons-input">
+                        <input type="text" name="Name" value="@Model.Name" class="edit-input" placeholder="Name" style="display: none;" required />
+                        <input type="text" name="Author" value="@Model.Author" class="edit-input" placeholder="Author" style="display: none;" required />
+                        <input type="text" name="Description" value="@Model.Description" placeholder="Description" class="edit-input" style="display: none;" />
+                        <input type="datetime-local" name="IssueDate" value="@Model.IssueDate.ToString("yyyy-MM-ddTHH:mm")" class="edit-input" style="display: none;" />
+                        <select asp-for="GenreId" asp-items="Model.Genres" class="form-control" style="display: none;" required>
+                            <option value="">-- Select Genre --</option>
+                        </select>
+                        <input type="file" name="NewBookImagePath" class="form-control" accept="image/*" style="display: none;" />
+                        <input type="number" name="InitialCount" value="@Model.InitialCount" placeholder="Number Of Books" class="edit-input" required min="1" style="display: none;" />
+                        <div class="edit-buttons">
+                            <button type="button" class="ctrl-btn ed-orange edit-btn" id="edit-btn-@Model.Id">
+                                <i class="fas fa-edit"></i> Edit
+                            </button> 
+
+                            <button type="button" class="ctrl-btn ed-gray cancel-btn" id="cancel-btn-@Model.Id" style="display: none;">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                   
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="./js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

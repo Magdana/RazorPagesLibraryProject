@@ -1,4 +1,5 @@
 ﻿using RazorPagesLibraryProject.DTOes;
+using RazorPagesLibraryProject.Entities;
 
 namespace RazorPagesLibraryProject.Services.Interfaces
 {
