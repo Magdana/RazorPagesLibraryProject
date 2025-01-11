@@ -1,0 +1,53 @@
+﻿@page
+@model RazorPagesLibraryProject.Pages.ContactPageModel
+@{
+}
+<div class="contact-ctn">
+    <div class="ctn">
+        <div class="mailto-form">
+            <h6>send us an email:</h6>
+            <form action="mailto:library@library.com" method="post" enctype="text/plain">
+                Name:<br>
+                <input type="text" name="name" class="email-input"><br>
+                Surname:<br>
+                <input type="text" name="surname" class="email-input"><br>
+                E-mail:<br>
+                <input type="email" name="mail" class="email-input"><br>
+                Message:<br>
+                <input type="text" name="comment" class="email-input"><br><br>
+                <div class="email-btns">
+                    <input type="submit" value="Send" class="email-input-btn">
+                    <input type="reset" value="Reset" class="email-input-btn">
+                </div>
+
+            </form>
+        </div>
+        <div class="address-cont">
+            <div class="logo-addr-hors-cont">
+                <img src="./address.png" alt="address logo" />
+                <div class="addrss-workHours">
+                    <p class="address">Tbilisi, Iosebidze St. №49</p>
+                    <p class="workHours">Working hours: 09:30-18:30</p>
+                </div>
+            </div>
+            <div class="numb-email-cont">
+                <div class="number-cont">
+                    <img src="./email.png" alt="email logo" />
+                    <p>library@library.ge</p>
+                </div>
+                <div class="email-cont">
+                    <img src="./mobile.png" alt="mobile icon" />
+                    <p><a href="tel:+995-577-77-77-77">577-77-77-77</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+    <div class="social-links">
+        <a href="#"><img src="./facebook.png" alt="facebook logo" class="social-icon"/></a>
+        <a href="#"><img src="./instagram.png" alt="instagram logo" class="social-icon" /></a>
+        <a href="#"><img src="./linkedin.png" alt="linkedin logo" class="social-icon" /></a>
+        <a href="#"><img src="./youtube.png" alt="youtube logo" class="social-icon" /></a>
+        <a href="#"><img src="./tiktok.png" alt="tiktio logo" class="social-icon" /></a>
+    </div>
+</div>

@@ -178,12 +178,14 @@ h2 {
     cursor: pointer;
     transition: 0.3s ease;
 }
-.card-header p{
-    font-size: 13px;
-}
-.card-header:hover {
-    transform: scale(1.1);
-}
+
+    .card-header p {
+        font-size: 13px;
+    }
+
+    .card-header:hover {
+        transform: scale(1.1);
+    }
 
 h5 {
     font-size: 20px;
@@ -435,4 +437,112 @@ h5 {
 
 footer {
     margin-top: 40px;
+}
+
+.contact-ctn {
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    display: flex;
+    color: blanchedalmond;
+    flex-direction: column;
+    height: 100vh;
+}
+
+h6 {
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.email-input {
+    width: 250px;
+    height: 35px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.mailto-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-input-btn {
+    width: 100px;
+}
+
+.email-btns {
+    display: flex;
+    gap: 50px;
+}
+
+    .email-btns input {
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+.logo-addr-hors-cont img {
+    height: 50px;
+}
+
+.logo-addr-hors-cont {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.addrss-workHours {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.number-cont img {
+    height: 35px;
+}
+
+.number-cont {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.address-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 65px;
+}
+
+.email-cont img {
+    height: 42px
+}
+
+.email-cont {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.numb-email-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.social-links {
+    background-color: cadetblue;
+    border-radius: 15px;
+    height: 50px;
+    margin-top: 59px;
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    margin-top: 150px;
+}
+
+.ctn {
+    display: flex;
+    justify-content: space-between;
 }
