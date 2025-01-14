@@ -279,6 +279,12 @@ h5 {
     justify-content: center;
 }
 
+#search-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .search-title-cont {
     display: flex;
     align-items: center;

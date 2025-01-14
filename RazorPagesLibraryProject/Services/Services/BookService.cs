@@ -120,7 +120,7 @@ namespace RazorPagesLibraryProject.Services.Services
             return result;
         }
 
-        public async Task<ResponseDTO<BookGetDTO>> Search(string keyword)
+        public async Task<List<BookGetDTO>> Search(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
@@ -132,16 +132,12 @@ namespace RazorPagesLibraryProject.Services.Services
             var count = bookEntities.Count();
             if (count == 0)
             {
-                return new ResponseDTO<BookGetDTO> { Count = 0, Entities = new List<BookGetDTO>() };
+                return new List<BookGetDTO> ();
             }
             var bookDTOs = bookEntities.Select((e) => { return _mapper.Map<BookGetDTO>(e); })
                             .OrderByDescending(d => d.CreatedAt).ToList();
-            var result = new ResponseDTO<BookGetDTO>
-            {
-                Count = count,
-                Entities = bookDTOs
-            };
-            return result;
+            
+            return bookDTOs;
         }
 
         public async Task<List<BookGetDTO>> GetAllAsync()

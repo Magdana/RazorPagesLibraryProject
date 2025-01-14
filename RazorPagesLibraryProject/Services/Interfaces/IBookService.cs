@@ -10,7 +10,7 @@ namespace RazorPagesLibraryProject.Services.Interfaces
         Task<ResponseDTO<BookGetDTO>> GetAll(int pageNumber, int pageSize);
         Task Delete(BookGetDTO entityDto);
         Task<ResponseDTO<BookGetDTO>> GetFilteredByDate(DateTime? createdAt);
-        Task<ResponseDTO<BookGetDTO>> Search(string keyword);
+        Task<List<BookGetDTO>> Search(string keyword);
         Task<List<BookGetDTO>> GetAllAsync();
         Task<List<string>> GetLastAdded();
         Task<IEnumerable<BookGetDTO>> GetBooksByGenresAsync(int genreId);

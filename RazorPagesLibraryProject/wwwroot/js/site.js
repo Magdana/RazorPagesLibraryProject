@@ -57,13 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             const form = button.closest("form");
-            const inputs = form.querySelectorAll('input');  // Select all input elements
+            const inputs = form.querySelectorAll('input');
             const cancelButton = form.querySelector('.cancel-btn');
             const deleteForm = document.getElementById(`delete-form-${button.id.split('-')[2]}`);
 
-            // Show all input fields and set them to editable
             inputs.forEach(input => {
-                input.style.display = "inline-block";  // Show each input
+                input.style.display = "inline-block";
             });
 
             cancelButton.style.display = "inline-block";
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             button.innerHTML = '<i class="fas fa-save"></i> Save';
             button.classList.add("save-mode");
 
-            // Listen for the button click again to submit the form
             button.addEventListener("click", () => {
                 form.submit();
             });
@@ -85,14 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             const form = button.closest("form");
-            const inputs = form.querySelectorAll('input');  // Select all input elements
+            const inputs = form.querySelectorAll('input'); 
             const editButton = form.querySelector('.edit-btn');
             const deleteForm = document.getElementById(`delete-form-${button.id.split('-')[2]}`);
 
-            // Hide all input fields and reset them to their default values
+            
             inputs.forEach(input => {
-                input.style.display = "none";  // Hide the input
-                input.value = input.defaultValue;  // Reset to default value
+                input.style.display = "none"; 
+                input.value = input.defaultValue;  
             });
 
             deleteForm.style.display = "block";

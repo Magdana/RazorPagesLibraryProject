@@ -41,12 +41,44 @@ namespace RazorPagesLibraryProject.Pages
         public DateTime NewBookIssueDate { get; set; }
         [BindProperty]
         public IFormFile? NewBookImagePath { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SearchWord { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int Id { get; set; }
 
         public async Task OnGet()
         {
             try
             {
                 Books = await _bookService.GetAllAsync();
+                var genreEntities = await _genreService.GetAllAsync();
+                Genres = genreEntities
+                    .Select(g => new SelectListItem
+                    {
+                        Value = g.Id.ToString(),
+                        Text = g.Name
+                    })
+                    .ToList();
+                if (!string.IsNullOrEmpty(SearchWord))
+                {
+                    Books = await _bookService.Search(SearchWord);
+                }
+            }
+            catch
+            {
+                Message = "Error loading books or genres.";
+                Books = new List<BookGetDTO>();
+                Genres = new List<SelectListItem>();
+            }
+        }
+
+        public async Task OnGetFilteredByGenre(int id)
+        {
+            try
+            {
+                id = Id;
+                var books = await _bookService.GetBooksByGenresAsync(id);
+                Books = books.ToList();
                 var genreEntities = await _genreService.GetAllAsync();
                 Genres = genreEntities
                     .Select(g => new SelectListItem

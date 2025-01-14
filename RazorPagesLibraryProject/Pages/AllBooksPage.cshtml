@@ -7,15 +7,15 @@
     <div class="alert alert-info">@Model.Message</div>
 }
 <div class="books-ctn">
-    <div class="search-title-cont-books">
+    <div class="search-title-cont">
         <div class="text-center">
             <h2>All Books</h2>
         </div>
-        @*  <form id="search-form" method="get">
-        <input type="text" asp-for="SearchWord" class="form-control" placeholder="Enter the search word..." required />
-        <button type="submit" value="Filter" class="add-btn">Search</button>
-        <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
-        </form> *@
+        <form id="search-form" method="get">
+            <input type="text" asp-for="SearchWord" class="form-control" placeholder="Enter the search word..." required />
+            <button type="submit" value="Filter" class="add-btn">Search</button>
+            <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
+        </form>
     </div>
     @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
     {
