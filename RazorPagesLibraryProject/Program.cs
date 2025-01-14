@@ -7,6 +7,8 @@ using RazorPagesLibraryProject.Repository.Interfaces;
 using RazorPagesLibraryProject.Repository.Repositories;
 using RazorPagesLibraryProject.Services.Interfaces;
 using RazorPagesLibraryProject.Services.Services;
+using Microsoft.AspNetCore.Identity;
+using RazorPagesLibraryProject.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ builder.Services.AddRazorPages();
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<LibraryDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<UserEntity>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<LibraryDbContext>();
 
 builder.Services.AddAutoMapper(typeof(BookEntityAutoMapperProfile).Assembly);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -45,6 +51,7 @@ app.UseStaticFiles(new StaticFileOptions()
 });
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 

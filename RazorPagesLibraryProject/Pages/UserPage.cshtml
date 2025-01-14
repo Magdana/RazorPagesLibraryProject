@@ -1,0 +1,26 @@
+﻿@page
+@model RazorPagesLibraryProject.Pages.UserPageModel
+@{
+}
+<h2>Welcome To Your Page</h2>
+
+<div>
+    <div>
+        First Name: @Model.appUser?.FirstName
+    </div>
+    <div>
+        Last Name: @Model.appUser?.LastName
+    </div>
+    <div>
+        Email: @Model.appUser?.Email
+    </div>
+    <div>
+        Phone: @Model.appUser?.PhoneNumber
+    </div>
+    <div>
+        Address: @Model.appUser?.Address
+    </div>
+    <div>
+        Created At: @Model.appUser?.CreatedAt.ToString("dd/MM/yyy")
+    </div>
+</div>

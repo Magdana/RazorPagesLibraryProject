@@ -62,6 +62,10 @@ namespace RazorPagesLibraryProject.Pages
         {
             try
             {
+                if (!User.IsInRole("admin"))
+                {
+                    return Forbid();
+                }
                 if (!string.IsNullOrEmpty(NewGenreName))
                 {
                     var genre = new GenreCreateDTO { Name = NewGenreName };
@@ -79,6 +83,10 @@ namespace RazorPagesLibraryProject.Pages
         {
             try
             {
+                if (!User.IsInRole("admin"))
+                {
+                    return Forbid();
+                }
                 var genre = new GenreGetDTO { Id = GenreId };
 
                 if (genre != null)
@@ -95,6 +103,10 @@ namespace RazorPagesLibraryProject.Pages
 
         public async Task<IActionResult> OnPostEditGenreAsync()
         {
+            if (!User.IsInRole("admin"))
+            {
+                return Forbid();
+            }
             if (string.IsNullOrEmpty(UpdatedGenreName))
             {
                 return RedirectToPage();

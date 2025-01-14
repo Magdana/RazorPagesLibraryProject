@@ -13,14 +13,16 @@
             <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
         </form>
     </div>
-   
-    <div class="add-card">
-        <h5>Add New Genre</h5>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+    {
+        <div class="add-card">
+            <h5>Add New Genre</h5>
         <form method="post" asp-page-handler="AddGenre">
             <input type="text" asp-for="NewGenreName" class="form-control" placeholder="Enter new genre name..." required />
             <button type="submit" class="add-btn">Add Genre</button>
         </form>
     </div>
+    }
     <div class="genres-list">
         <div class="row">
             @foreach (var genre in Model.Genres)
@@ -31,34 +33,37 @@
                             <h5>@genre.Name</h5>
                             <p class="book-count">@(genre.Count > 0 ? $"{genre.Count} book(s)" : "No books")</p>
                         </div>
-                        <div class="ctrl-btns-cont">
-                            <form method="post" asp-page-handler="DeleteGenre" id="delete-form-@genre.Id">
-                                <input type="hidden" name="GenreId" value="@genre.Id" />
-                                <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();"> <i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
-                            <form method="post" asp-page-handler="EditGenre" id="edit-form-@genre.Id">
-                                <input type="hidden" name="GenreId" value="@genre.Id" required/>
-                                <div class="edit-buttons-input">
-                                    <input type="text"
-                                           name="UpdatedGenreName"
-                                           value="@genre.Name"
-                                           class="edit-input"
-                                           id="input-@genre.Id"
-                                           style="display: none;"/>
-                                    <div class="edit-buttons">
-                                        <button type="button" class="ctrl-btn ed-orange edit-btn" id="edit-btn-@genre.Id">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </button>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <div class="ctrl-btns-cont">
+                                <form method="post" asp-page-handler="DeleteGenre" id="delete-form-@genre.Id">
+                                    <input type="hidden" name="GenreId" value="@genre.Id" />
+                                    <button type="submit" class="ctrl-btn del-red" onclick="return confirmDelete();"> <i class="fas fa-trash-alt"></i> Delete</button>
+                                </form>
+                                <form method="post" asp-page-handler="EditGenre" id="edit-form-@genre.Id">
+                                    <input type="hidden" name="GenreId" value="@genre.Id" required/>
+                                    <div class="edit-buttons-input">
+                                        <input type="text"
+                                        name="UpdatedGenreName"
+                                        value="@genre.Name"
+                                        class="edit-input"
+                                        id="input-@genre.Id"
+                                        style="display: none;"/>
+                                        <div class="edit-buttons">
+                                            <button type="button" class="ctrl-btn ed-orange edit-btn" id="edit-btn-@genre.Id">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
 
-                                        <button type="button" class="ctrl-btn ed-gray cancel-btn" id="cancel-btn-@genre.Id" style="display: none;">
-                                            <i class="fas fa-times"></i> Cancel
-                                        </button>
+                                            <button type="button" class="ctrl-btn ed-gray cancel-btn" id="cancel-btn-@genre.Id" style="display: none;">
+                                                <i class="fas fa-times"></i> Cancel
+                                            </button>
+                                        </div>
+
                                     </div>
-                                   
-                                </div>
 
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        }
 
                     </div>
                 </div>

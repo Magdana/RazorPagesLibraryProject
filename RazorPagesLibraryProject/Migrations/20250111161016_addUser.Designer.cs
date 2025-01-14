@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RazorPagesLibraryProject.DataAccess;
 
@@ -11,9 +12,10 @@ using RazorPagesLibraryProject.DataAccess;
 namespace RazorPagesLibraryProject.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250111161016_addUser")]
+    partial class addUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,22 +49,6 @@ namespace RazorPagesLibraryProject.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1cb561d3-484d-45ed-9440-79b08769e324",
-                            ConcurrencyStamp = "915cae38-10d4-4082-9e8e-9aab14ef81a1",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        },
-                        new
-                        {
-                            Id = "75e18f84-1b22-44ca-9b79-f6e3e81b87b8",
-                            ConcurrencyStamp = "4a293db1-d6e5-40ff-aaee-00c4087bdd4c",
-                            Name = "client",
-                            NormalizedName = "client"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

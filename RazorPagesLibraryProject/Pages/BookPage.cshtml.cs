@@ -85,6 +85,10 @@ namespace RazorPagesLibraryProject.Pages
         {
             try
             {
+                if (!User.IsInRole("admin"))
+                {
+                    return Forbid();
+                }
                 var book = new BookGetDTO { Id = id };
 
                 if (book != null)
@@ -103,6 +107,10 @@ namespace RazorPagesLibraryProject.Pages
         {
             try
             {
+                if (!User.IsInRole("admin"))
+                {
+                    return Forbid();
+                }
                 var book = await _bookService.GetById(Id);
                 if (book == null)
                 {

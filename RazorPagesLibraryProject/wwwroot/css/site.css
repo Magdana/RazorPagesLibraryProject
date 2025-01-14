@@ -154,6 +154,7 @@ h2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+    margin-top: 30px;
 }
 
 .genres-ctn {
@@ -545,4 +546,65 @@ h6 {
 .ctn {
     display: flex;
     justify-content: space-between;
+}
+
+.register-ctn {
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 15px;
+    color: burlywood;
+}
+
+.register-parag, .login-parag {
+    font-size: 25px;
+}
+
+#registerForm {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 700px;
+}
+
+.form-floating {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.w-100 {
+    width: 100px;
+    background-color: lemonchiffon;
+    height: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: coral;
+    font-style: italic;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.forgot-password {
+    margin-top: 15px;
+    text-align: left;
 }

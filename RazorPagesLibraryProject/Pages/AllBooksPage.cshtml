@@ -17,26 +17,29 @@
         <button type="button" class="add-btn" onclick="clearSearch()">Clear Search</button>
         </form> *@
     </div>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+    {
+        <div class="add-book">
+            <h5>Add New Book</h5>
+            <form method="post" asp-page-handler="AddBook" id="add-book-form" enctype="multipart/form-data">
+                <input type="text" asp-for="NewBookName" class="form-control" placeholder="Book Name..." required />
+                <input type="text" asp-for="NewBookAuthor" class="form-control" placeholder="Author..." required />
+                <textarea asp-for="NewBookDescription" class="form-control" placeholder="Description..."></textarea>
+                <input type="number" asp-for="NewBookInitialCount" class="form-control" placeholder="Number Of Books..." required min="1" />
+                <select asp-for="NewBookGenreId" asp-items="Model.Genres" class="form-control" required>
+                    <option value="">-- Select Genre --</option>
+                </select>
+                <input type="date" asp-for="NewBookIssueDate" class="form-control" required />
+                <input type="file" name="NewBookImagePath" class="form-control" accept="image/*" required />
+                <div class="add-clear-btns">
+                    <button type="submit" class="add-btn">Add Book</button>
+                    <button type="button" class="add-btn" onclick="clearForm()">Clear</button>
+                </div>
+            </form>
 
-    <div class="add-book">
-        <h5>Add New Book</h5>
-        <form method="post" asp-page-handler="AddBook" id="add-book-form" enctype="multipart/form-data">
-            <input type="text" asp-for="NewBookName" class="form-control" placeholder="Book Name..." required />
-            <input type="text" asp-for="NewBookAuthor" class="form-control" placeholder="Author..." required />
-            <textarea asp-for="NewBookDescription" class="form-control" placeholder="Description..."></textarea>
-            <input type="number" asp-for="NewBookInitialCount" class="form-control" placeholder="Number Of Books..." required min="1" />
-            <select asp-for="NewBookGenreId" asp-items="Model.Genres" class="form-control" required>
-                <option value="">-- Select Genre --</option>
-            </select>
-            <input type="date" asp-for="NewBookIssueDate" class="form-control" required />
-            <input type="file" name="NewBookImagePath" class="form-control" accept="image/*" required />
-            <div class="add-clear-btns">
-                <button type="submit" class="add-btn">Add Book</button>
-                <button type="button" class="add-btn" onclick="clearForm()">Clear</button>
-            </div>
-        </form>
+        </div>
+    }
 
-    </div>
     <div class="books-list">
         <div class="listed-books">
             @foreach (var book in Model.Books)
@@ -54,7 +57,7 @@
                             </div>
                         </div>
                     </a>
-                    
+
                 </div>
             }
         </div>
