@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorPagesLibraryProject.DTOes;
 using RazorPagesLibraryProject.Services.Interfaces;
+using System.Drawing.Printing;
 using System.Linq;
 
 namespace RazorPagesLibraryProject.Pages
@@ -47,12 +48,20 @@ namespace RazorPagesLibraryProject.Pages
         public string? SearchWord { get; set; }
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
+        public int TotalPages { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                Books = await _bookService.GetAllAsync();
+                var response = await _bookService.GetAll(pageNumber, pageSize);
+                Books = response?.Entities?.ToList() ?? new List<BookGetDTO>();
+                TotalPages = (int)Math.Ceiling(response.Count / (double)pageSize);
+                CurrentPage = pageNumber;
+                PageSize = pageSize;
+                
                 var genreEntities = await _genreService.GetAllAsync();
                 Genres = genreEntities
                     .Select(g => new SelectListItem
@@ -76,6 +85,9 @@ namespace RazorPagesLibraryProject.Pages
             }
         }
 
+
+
+
         public async Task OnGetFilteredByGenre(int id)
         {
             try
@@ -92,7 +104,7 @@ namespace RazorPagesLibraryProject.Pages
                     })
                     .ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Message = "Error loading books or genres.";
                 Books = new List<BookGetDTO>();

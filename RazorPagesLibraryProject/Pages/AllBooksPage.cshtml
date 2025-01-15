@@ -62,4 +62,48 @@
             }
         </div>
     </div>
+    <div class="pagination">
+        @if (Model.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation" id="page-pagination">
+                <ul class="pagination">
+                    @if (Model.CurrentPage > 1)
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action("AllBooksPage", new { pageNumber = 1, pageSize = Model.PageSize })">First</a></li>
+                        <li class="page-item"><a class="page-link" href="@Url.Action("AllBooksPage", new { pageNumber = Model.CurrentPage - 1, pageSize = Model.PageSize })">Previous</a></li>
+                    }
+
+                    @{
+                        int startPage = Model.CurrentPage - 2;
+                        int endPage = Model.CurrentPage + 2;
+
+                        if (startPage <= 0)
+                        {
+                            startPage = 1;
+                            endPage = Math.Min(startPage + 10, Model.TotalPages);
+                        }
+
+                        if (endPage > Model.TotalPages)
+                        {
+                            endPage = Model.TotalPages;
+                            startPage = Math.Max(endPage - 10, 1);
+                        }
+
+                        for (int pageNum = startPage; pageNum <= endPage; pageNum++)
+                        {
+                            <li class="page-item @(pageNum == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" asp-action="AllBooksPage" asp-route-pageNumber="@pageNum" asp-route-pageSize="@Model.PageSize">@pageNum</a>
+                            </li>
+                        }
+                    }
+
+                    @if (Model.CurrentPage < Model.TotalPages)
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action("AllBooksPage", new { pageNumber = Model.CurrentPage + 1, pageSize = Model.PageSize })">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="@Url.Action("AllBooksPage", new { pageNumber = Model.TotalPages, pageSize = Model.PageSize })">Last</a></li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
 </div>
