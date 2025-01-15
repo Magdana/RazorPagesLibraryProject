@@ -650,7 +650,38 @@ h6 {
 .contact-link {
     text-decoration: underline;
 }
-.forgot-pass{
+
+.forgot-pass {
     font-size: 20px;
     margin: 15px 0px 0px;
+}
+
+.random-link img {
+    height: 180px;
+    width: 130px;
+}
+
+.random-div {
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+    .random-div h5 {
+        padding: 5px 0px;
+        color: antiquewhite;
+    }
+
+.random-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.random-btn {
+    background-color: antiquewhite;
+    height: 50px;
+    width: 70px;
+    border-radius:8px
 }

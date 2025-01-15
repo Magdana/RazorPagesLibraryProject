@@ -32,6 +32,18 @@
             <p>Each chapter of our story reflects our unwavering commitment to fostering a love for reading and lifelong learning, ensuring that our library remains a timeless treasure for generations to come.</p>
         </div>
     </div>
+    <div class="random-div">
+        <h5>Your Random Book</h5>
+        <div class="random-link">
+            <a asp-page="/BookPage" asp-page-handler="Get" asp-route-id="@Model.Id">
+                <img src="@Model.RandomBook" alt="Image" />
+            </a>
+            <button class="random-btn" onclick="window.location.reload();">Pick Another</button>
+        </div>
+
+    </div>
+
+
     <a href="/UserPage">user</a>
     <a href="/AdminPage">admin</a>
     <a href="/ClientPage">client</a>
