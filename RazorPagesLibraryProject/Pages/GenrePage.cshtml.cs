@@ -14,12 +14,14 @@ namespace RazorPagesLibraryProject.Pages
         private readonly IGenreService _genreService;
         private readonly IBookService _bookService;
         private readonly IMapper _mapper;
+        private readonly ILogger<GenrePageModel> _logger;
 
-        public GenrePageModel(IGenreService genreService, IMapper mapper, IBookService bookService)
+        public GenrePageModel(IGenreService genreService, IMapper mapper, IBookService bookService, ILogger<GenrePageModel> logger)
         {
             _genreService = genreService;
             _mapper = mapper;
-            _bookService= bookService;
+            _bookService = bookService;
+            _logger = logger;
         }
         public List<GenreGetDTO> Genres { get; set; }
         [BindProperty]
@@ -54,6 +56,7 @@ namespace RazorPagesLibraryProject.Pages
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while fetching all genres");
                 Genres = new List<GenreGetDTO>();
             }
         }
@@ -75,6 +78,7 @@ namespace RazorPagesLibraryProject.Pages
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while adding a new genre.");
                 return Page();
             }
         }
@@ -97,6 +101,7 @@ namespace RazorPagesLibraryProject.Pages
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while deleting a genre.");
                 return Page();
             }
         }
@@ -130,6 +135,7 @@ namespace RazorPagesLibraryProject.Pages
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while editing a genre.");
                 return Page();
             }
         }

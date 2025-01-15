@@ -9,6 +9,7 @@ using RazorPagesLibraryProject.Services.Interfaces;
 using RazorPagesLibraryProject.Services.Services;
 using Microsoft.AspNetCore.Identity;
 using RazorPagesLibraryProject.Entities;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,10 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 
+Log.Logger = new LoggerConfiguration()
+               .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,6 +55,7 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = "/UploadedFiles/images"
 });
 
+app.UseSerilogRequestLogging();
 app.UseRouting();
 app.UseAuthentication();;
 

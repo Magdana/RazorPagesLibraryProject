@@ -15,11 +15,13 @@ namespace RazorPagesLibraryProject.Pages
         private readonly IBookService _bookService;
         private readonly IGenreService _genreService;
         private readonly IMapper _mapper;
-        public BookPageModel(IBookService bookService, IMapper mapper, IGenreService genreService)
+        private readonly ILogger<BookPageModel> _logger;
+        public BookPageModel(IBookService bookService, IMapper mapper, IGenreService genreService, ILogger<BookPageModel> logger)
         {
             _bookService = bookService;
             _mapper = mapper;
             _genreService = genreService;
+            _logger = logger;
         }
 
         [BindProperty]
@@ -51,6 +53,7 @@ namespace RazorPagesLibraryProject.Pages
 
         public async Task<IActionResult> OnGet(int id)
         {
+
             var book = await _bookService.GetById(id);
             var genreEntities = await _genreService.GetAllAsync();
             Genres = genreEntities
@@ -99,6 +102,7 @@ namespace RazorPagesLibraryProject.Pages
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while deleting a book.");
                 return Page();
             }
         }
@@ -185,6 +189,7 @@ namespace RazorPagesLibraryProject.Pages
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "An error occurred while editing the book.");
+                _logger.LogError(ex, "Error occurred while editing a book.");
                 return Page();
             }
         }

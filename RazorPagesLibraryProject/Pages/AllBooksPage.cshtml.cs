@@ -13,12 +13,14 @@ namespace RazorPagesLibraryProject.Pages
         private readonly IBookService _bookService;
         private readonly IGenreService _genreService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger<AllBooksPageModel> _logger;
 
-        public AllBooksPageModel(IBookService bookService, IGenreService genreService, IWebHostEnvironment webHostEnvironment)
+        public AllBooksPageModel(IBookService bookService, IGenreService genreService, IWebHostEnvironment webHostEnvironment, ILogger<AllBooksPageModel> logger)
         {
             _bookService = bookService;
             _genreService = genreService;
             _webHostEnvironment = webHostEnvironment;
+            _logger = logger;
         }
 
         public List<BookGetDTO> Books { get; set; } = new();
@@ -64,11 +66,13 @@ namespace RazorPagesLibraryProject.Pages
                     Books = await _bookService.Search(SearchWord);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 Message = "Error loading books or genres.";
                 Books = new List<BookGetDTO>();
                 Genres = new List<SelectListItem>();
+                _logger.LogError(ex, "Error occurred while getting all books.");
+
             }
         }
 
@@ -88,11 +92,12 @@ namespace RazorPagesLibraryProject.Pages
                     })
                     .ToList();
             }
-            catch
+            catch(Exception ex)
             {
                 Message = "Error loading books or genres.";
                 Books = new List<BookGetDTO>();
                 Genres = new List<SelectListItem>();
+                _logger.LogError(ex, "Error occurred while getting books  by genre.");
             }
         }
 
@@ -164,6 +169,7 @@ namespace RazorPagesLibraryProject.Pages
             catch (Exception ex)
             {
                 Message = "An error occurred while adding the book.";
+                _logger.LogError(ex, "Error occurred while adding a new book.");
                 return Page();
             }
         }
